@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+dist/
+*.log
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
