@@ -1,22 +1,36 @@
 {
   "name": "vocabulary-tracker-services",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "A GraphQL-based vocabulary tracker built with Apollo Server, Express, MongoDB, and TypeScript",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "test": "echo \"No test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "vocabulary",
+    "graphql",
+    "apollo-server",
+    "express",
+    "typescript",
+    "mongoose"
+  ],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.10.2",
+    "apollo-server": "^3.13.0",
     "apollo-server-express": "^3.13.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "graphql": "^16.10.0",
-    "mongoose": "^8.9.2",
+    "mongodb": "^6.12.0",
+    "mongoose": "^8.9.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   }
