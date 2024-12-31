@@ -3,7 +3,7 @@ import { gql } from 'apollo-server-express';
 const wordSchema = gql`
   type Word {
     id: ID!
-    userId: ID!
+    userId: String!
     word: String!
     language: String!
     meaning: String!
@@ -12,13 +12,13 @@ const wordSchema = gql`
   }
 
   type Query {
-    getWords(userId: ID!): [Word]
+    getWords(userId: String!): [Word]
     getAllWords: [Word!]!
   }
 
   type Mutation {
     addWord(
-      userId: ID!,
+      userId: String!,
       word: String!,
       language: String!,
       meaning: String!,
@@ -28,6 +28,7 @@ const wordSchema = gql`
     deleteWord(id: ID!): Boolean
     editWord(
       id: ID!,
+      userId: String!,
       word: String,
       language: String,
       meaning: String,

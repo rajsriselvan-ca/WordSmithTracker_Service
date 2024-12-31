@@ -26,11 +26,16 @@ const wordResolvers = {
     ): Promise<IWord> => {
       try{
       const existingWord = await Word.findOne({ userId, word });
-      if (existingWord) throw new Error('Word already exists for this user.');
+      if (existingWord) throw new Error('WordAlreadyExists');
       const newWord = new Word({ userId, word, language, meaning, exampleSentence, createdAt });
       return await newWord.save();
-      } catch(error){
-        throw new Error(`addWord failed to fetch: ${error}`)
+      } catch (error){
+        if (error instanceof Error) {
+        if (error.message === 'WordAlreadyExists') {
+          throw new Error('Word Already Exists');
+        }
+      }
+        throw new Error(`An unexpected error occured while creating a new word.`)
       }
     },
     deleteWord: async (_: unknown, { id }: { id: string }): Promise<boolean> => {
