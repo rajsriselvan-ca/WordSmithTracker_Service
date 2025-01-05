@@ -11,7 +11,7 @@ import languageResolver from "./resolvers/languageResolvers";
 import seedLanguages from "./helper/languageSeeding"; 
 import dotenv from "dotenv";  
 dotenv.config();
-const PORT: string = process.env.PORT || "3000";
+const PORT: string = process.env.PORT || "4000";
 
 const server = new ApolloServer({
   typeDefs: [userSchema, wordSchema, languageSchema],

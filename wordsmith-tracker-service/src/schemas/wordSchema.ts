@@ -27,13 +27,13 @@ const wordSchema = gql`
     ): Word
     deleteWord(id: ID!): Boolean
     editWord(
-      id: ID!,
-      userId: String!,
+      id: ID!
+      userId: String,
       word: String,
       language: String,
       meaning: String,
       exampleSentence: String
-      createdAt: String!
+      createdAt: String
     ): Word
   }
 `;
