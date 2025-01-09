@@ -43,7 +43,7 @@ const wordResolvers = {
         const result = await Word.findByIdAndDelete(id);
         return !!result;
       } catch(error){
-        throw new Error(`deleteWord failed to fetch: ${error}`)
+        throw new Error(`Failed to Delete the Word: ${error}`)
       }
     },
     editWord: async (
