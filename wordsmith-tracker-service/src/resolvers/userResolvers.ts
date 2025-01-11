@@ -1,5 +1,6 @@
 import { IUser } from '../models/userModel';
 import User from '../models/userModel';
+import { generateToken } from "../helper/jwtHelper";
 
 const userResolvers = {
   Query: {
@@ -22,6 +23,14 @@ const userResolvers = {
     }
   },
   Mutation: {
+    loginUser: async (_: unknown, { email }: { email: string }): Promise<{ token: string, user: IUser } | null> => {
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new Error('Invalid credentials');
+      }
+      const token = generateToken({ id: user._id, email: user.email });
+      return { token, user };
+    },
     createUser: async (_: unknown, { username, email, dailyGoal, createdAt }: IUser): Promise<IUser | null> => {
       try {
         const existingUser = await User.findOne({ email });

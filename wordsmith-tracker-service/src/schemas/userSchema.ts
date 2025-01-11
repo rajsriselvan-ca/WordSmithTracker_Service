@@ -14,8 +14,14 @@ const userSchema = gql`
     getAllUsers: [User!]!    
   }
 
+  type AuthPayload {
+    token: String!
+    user: User!
+  }
+
   type Mutation {
     createUser(username: String!, email: String!, dailyGoal: Int!, createdAt: String!): User
+    loginUser(email: String!): AuthPayload
   }
 `;
 
