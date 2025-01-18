@@ -3,6 +3,7 @@ import Language from "../models/languageModel";
 export const seedLanguages = async () => {
   const languages = [
     'English',
+    'Irish',
     'German',
     'French',
     'Spanish',
