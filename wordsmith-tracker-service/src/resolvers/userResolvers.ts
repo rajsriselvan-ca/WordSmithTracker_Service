@@ -24,9 +24,9 @@ const userResolvers = {
   },
   Mutation: {
     loginUser: async (_: unknown, { email }: { email: string }): Promise<{ token: string, user: IUser } | null> => {
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email: { $regex: `^${email}$`, $options: "i" } }); 
       if (!user) {
-        throw new Error('Invalid credentials');
+        throw new Error("Invalid credentials");
       }
       const token = generateToken({ id: user._id, email: user.email });
       return { token, user };
