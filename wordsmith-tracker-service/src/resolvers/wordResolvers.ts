@@ -3,13 +3,19 @@ import Word from '../models/wordModel';
 
 const wordResolvers = {
   Query: {
-    getWords: async (_: unknown, { userId }: { userId: string }): Promise<IWord[]> => {
-      try{
-        return await Word.find({ userId });
-      } catch(error){
-        throw new Error(`getWords failed to fetch: ${error}`)
+    getWords: async (
+      _: unknown,
+      { userId, page = 1, limit = 4 }: { userId: string; page?: number; limit?: number }
+    ): Promise<{ words: IWord[]; total: number }> => {
+      try {
+        const total = await Word.countDocuments({ userId }); 
+        const words = await Word.find({ userId })
+          .skip((page - 1) * limit)
+          .limit(limit);
+        return { words, total };
+      } catch (error) {
+        throw new Error(`getWords failed to fetch: ${error}`);
       }
-      
     },
     getAllWords: async (): Promise<IWord[]> => {
       try{

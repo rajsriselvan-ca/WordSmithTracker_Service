@@ -10,9 +10,14 @@ const wordSchema = gql`
     exampleSentence: String!
     createdAt: String!
   }
+  
+  type PaginatedWords {
+  words: [Word!]!
+  total: Int!
+}
 
   type Query {
-    getWords(userId: String!): [Word]
+    getWords(userId: String!, page: Int, limit: Int): PaginatedWords!
     getAllWords: [Word!]!
   }
 
@@ -27,7 +32,7 @@ const wordSchema = gql`
     ): Word
     deleteWord(id: ID!): Boolean
     editWord(
-      id: ID!
+      id: ID! 
       userId: String
       word: String
       language: String
