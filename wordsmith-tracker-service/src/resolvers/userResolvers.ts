@@ -33,17 +33,21 @@ const userResolvers = {
     },
     createUser: async (_: unknown, { username, email, dailyGoal, createdAt }: IUser): Promise<IUser | null> => {
       try {
-        const existingUser = await User.findOne({ email });
+        const normalizedEmail = email.toLowerCase();
+        const existingUser = await User.findOne({ email: normalizedEmail });
         if (existingUser) {
-          throw new Error('UserEmailAlreadyExists');
+          throw new Error('User email already exists.');
         }
-        const newUser = new User({ username, email, dailyGoal, createdAt });
+        const newUser = new User({ 
+          username, 
+          email: normalizedEmail, 
+          dailyGoal, 
+          createdAt 
+        });
         return await newUser.save();  
       } catch (error) {
         if (error instanceof Error) {
-          if (error.message === 'UserEmailAlreadyExists') {
-            throw new Error('User email already exists.');
-          }
+          throw new Error(error.message || 'An unexpected error occurred while creating the user.');
         }
         throw new Error('An unexpected error occurred while creating the user.');
       }
