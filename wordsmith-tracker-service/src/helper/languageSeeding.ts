@@ -9,8 +9,6 @@ export const seedLanguages = async () => {
     'Spanish',
     'Tamil',
     'Hindi',
-    'Chinese',
-    'Japanese',
   ];
 
   try {
