@@ -1,4 +1,4 @@
-import jwt, { JwtPayload, Secret } from "jsonwebtoken";
+import jwt, { JwtPayload, Secret, SignOptions } from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 if (!JWT_SECRET) {
@@ -7,7 +7,8 @@ if (!JWT_SECRET) {
 
 export const generateToken = (
   payload: JwtPayload | string,
-  expiresIn: string = "1h" 
+  expiresIn: string = "1h"
 ): string => {
-  return jwt.sign(payload, JWT_SECRET as Secret, { expiresIn });
+  const options: SignOptions = { expiresIn }; 
+  return jwt.sign(payload, JWT_SECRET as Secret, options);
 };
