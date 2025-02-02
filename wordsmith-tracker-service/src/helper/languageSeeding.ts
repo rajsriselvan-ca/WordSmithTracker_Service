@@ -1,5 +1,9 @@
 import Language from "../models/languageModel"; 
 
+interface MongoError extends Error {
+  code?: number;
+}
+
 export const seedLanguages = async () => {
   const languages = [
     'English',
@@ -17,8 +21,9 @@ export const seedLanguages = async () => {
       { ordered: false } 
     );
     console.log("Languages seeded successfully");
-  } catch (error: any) {
-    if (error.code === 11000) {
+  } catch (error: unknown) {
+    const mongoError = error as MongoError;
+    if (mongoError.code === 11000) {
       console.log("Languages already exist");
     } else {
       console.error("Error seeding languages:", error);
